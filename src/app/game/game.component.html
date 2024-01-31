@@ -1,0 +1,23 @@
+<div class="player-div">
+    <app-hand (cardPlayed)="getPlayedCards()" 
+              (cardDiscarded)="updateGameInfo()" 
+              (giveHint)="giveHint($event)"
+              *ngFor="let player of game?.players" 
+              [player]="player" 
+              [currentTurn]="game?.currentTurn"
+              [hintCardIds]="cardIds"
+              ></app-hand>
+</div>
+<div>
+    <div>{{game?.currentTurn?.name}}'s turn</div>
+    <div>Hints remaining: {{game?.hints}}</div>
+    <div>Fuses remaining: {{game?.fuses}}</div>
+</div>
+<div>
+    <h3>Played Cards</h3>
+    <div>Blue: {{lastBluePlayed}}</div>
+    <div>Yellow: {{lastYellowPlayed}}</div>
+    <div>Green: {{lastGreenPlayed}}</div>
+    <div>Red: {{lastRedPlayed}}</div>
+    <div>White: {{lastWhitePlayed}}</div>
+</div>

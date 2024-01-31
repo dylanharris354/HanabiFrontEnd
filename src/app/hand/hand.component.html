@@ -1,0 +1,38 @@
+<h2>{{player.username}}</h2>
+<div class="hand-container">
+    <span *ngFor="let card of currentHand">
+        <span class="card" [ngClass]="{'hint': hintCardIds?.indexOf(card.id) !== -1 && hintCardIds !== undefined}" (click)="cardClicked(card)">
+            <span [ngClass]="{
+                'hidden': player.id === currentTurn?.id,
+                'Blue': card.color === 'Blue',
+                'Green': card.color === 'Green',
+                'White': card.color === 'White',
+                'Red': card.color === 'Red',
+                'Yellow': card.color === 'Yellow'
+                }">{{card.number}}</span>
+        </span>
+    </span>
+</div>
+<div *ngIf="player.id === currentTurn?.id">
+    <div class="action-button">
+        <button (click)="selectPlay()">Play Card</button>
+        <div *ngIf="playSelected">Select which card to play!</div>
+    </div>
+    <div class="action-button">
+        <button (click)="selectDiscard()">Discard</button>
+        <div *ngIf="discardSelected">Select which card to discard</div>
+    </div>
+    <div class="action-button">
+        <button (click)="selectHint()">Give Hint</button>
+    </div>
+    <div *ngIf="hintSelected">
+        <button (click)="selectColor()">Color</button>
+        <button (click)="selectNumber()">Number</button>
+    </div>
+    <div *ngIf="colorSelected">
+        <button *ngFor="let color of colors" (click)="hintGiven(color)">{{color}}</button>
+    </div>
+    <div *ngIf="numberSelected">
+        <button *ngFor="let number of numbers" (click)="hintGiven(number)">{{number}}</button>
+    </div>
+</div>
